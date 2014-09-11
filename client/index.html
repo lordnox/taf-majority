@@ -25,10 +25,7 @@
   <body data-ng-app="app"
       id="app"
       class="app"
-      data-custom-page
-      data-off-canvas-nav
       data-ng-controller="AppCtrl"
-      data-ng-class=" {'layout-boxed': admin.layout === 'boxed'} "
       >
     <!--[if lt IE 9]>
       <div class="lt-ie9-bg">
@@ -39,7 +36,7 @@
 
     <aside data-ng-include=" 'views/nav.html' " class="nav-container"></aside>
 
-    <div class="content-container">
+    <div class="content-container" data-ng-class="{small: navigation.open}">
       <section data-ng-view class="view-container {{admin.pageTransition.class}}"></section>
     </div>
 
@@ -54,19 +51,8 @@
     <!-- build:js scripts/ui.js -->
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/jquery-spinner/dist/jquery.spinner.js"></script>
-    <script src="bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-    <script src="bower_components/jquery-steps/build/jquery.steps.js"></script>
-    <script src="bower_components/toastr/toastr.js"></script>
     <script src="bower_components/bootstrap-file-input/bootstrap.file-input.js"></script>
     <script src="bower_components/jquery.slimscroll/jquery.slimscroll.js"></script>
-    <script src="bower_components/flot/jquery.flot.js"></script>
-    <script src="bower_components/flot/jquery.flot.resize.js"></script>
-    <script src="bower_components/flot/jquery.flot.pie.js"></script>
-    <script src="bower_components/flot/jquery.flot.stack.js"></script>
-    <script src="bower_components/flot.curvedlines/curvedLines.js"></script>
-    <script src="bower_components/flot.tooltip/js/jquery.flot.tooltip.js"></script>
-    <script src="bower_components/flot/jquery.flot.time.js"></script>
-    <script src="bower_components/jquery.easy-pie-chart/dist/angular.easypiechart.js"></script>
     <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
     <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
     <script src="bower_components/ng-tags-input/ng-tags-input.js"></script>
@@ -77,9 +63,7 @@
     <!-- build:js({.tmp,client}) scripts/app.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/shared/main.js"></script>
-    <script src="scripts/shared/directives.js"></script>
     <script src="scripts/shared/localize.js"></script>
-    <script src="scripts/shared/Nav.js"></script>
     <script src="scripts/Components/radialSelect.js"></script>
     <script src="scripts/Components/tafRatings.js"></script>
     <script src="scripts/TAF/taf.js"></script>

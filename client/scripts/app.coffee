@@ -7,16 +7,10 @@ angular.module('app', [
 
   # 3rd Party Modules
   'ui.bootstrap'
-  'easypiechart'
-  'ui.tree'
-  'ngMap'
-  'ngTagsInput'
 
   # Custom modules
   'app.controllers'
-  'app.directives'
   'app.localization'
-  'app.nav'
 
   'taf'
 ])

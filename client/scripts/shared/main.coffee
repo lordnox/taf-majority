@@ -8,6 +8,9 @@ angular.module('app.controllers', [])
     ($scope, $rootScope) ->
         $window = $(window)
 
+        $scope.navigation =
+            open: false
+
         $scope.main =
             brand: 'Slim'
             name: 'Lisa Doe' # those which uses i18n directive can not be replaced for now.
@@ -58,42 +61,5 @@ angular.module('app.controllers', [])
 
             return
         , true)
-
-        $scope.color =
-            primary:        '#5B90BF'
-            success:        '#A3BE8C'
-            info:           '#7FABD2'
-            infoAlt:        '#B48EAD'
-            warning:        '#EBCB8B'
-            danger:         '#BF616A'
-            gray:           '#DCDCDC'
-])
-
-.controller('HeaderCtrl', [
-    '$scope'
-    ($scope) ->
-])
-
-.controller('NavContainerCtrl', [
-    '$scope'
-    ($scope) ->
-])
-.controller('NavCtrl', [
-    '$scope'
-    # 'taskStorage'
-    'filterFilter'
-    ($scope, filterFilter) ->
-        # # init
-        # tasks = $scope.tasks = taskStorage.get()
-        # $scope.taskRemainingCount = filterFilter(tasks, {completed: false}).length
-
-        # $scope.$on('taskRemaining:changed', (event, count) ->
-        #     $scope.taskRemainingCount = count
-        # )
-])
-
-.controller('DashboardCtrl', [
-    '$scope'
-    ($scope) ->
 
 ])

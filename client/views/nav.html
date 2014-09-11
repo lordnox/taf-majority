@@ -1,16 +1,22 @@
 
-<nav class="nav-wrapper" ng-controller="NavCtrl" ng-class="{opened: open}">
-  <a class="nav-trigger" ng-click="open=!open"><span>Menu</span></a>
-  <ul class="nav-list" data-highlight-active>
+<nav class="nav-wrapper" ng-class="{opened: navigation.open}">
+  <a class="nav-trigger" ng-click="navigation.open=!navigation.open"><span>Menu</span></a>
+  <ul class="nav-list">
     <li>
-      <a ng-click="open=false" class="ti-pencil" href="#/taf/home"><span data-i18n="Eingabe"></span></a>
+      <a ng-click="open=false" class="ti-pencil" href="#/taf/home">
+        <span data-i18n="Eingabe"></span>
+      </a>
     </li>
     <li>
-      <a ng-click="open=false" class="ti-import" href="#/taf/import"><span data-i18n="Importieren"></span></a>
+      <a ng-click="open=false" class="ti-import" href="#/taf/import">
+        <span data-i18n="Importieren"></span>
+      </a>
     </li>
     <li>
-      <a ng-click="open=false" class="glyphicon glyphicon-retweet" href="#/taf/calculate"><span data-i18n="Berechnen"></span></a>
+      <a ng-click="open=false" class="glyphicon glyphicon-retweet" href="#/taf/calculate">
+        <span data-i18n="Berechnen"></span>
+      </a>
     </li>
   </ul>
-  <div class="nav-overlay" ng-click="open=!open"></div>
+  <div class="nav-overlay" ng-click="navigation.open=!navigation.open"></div>
 </nav>
