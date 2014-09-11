@@ -11,11 +11,6 @@ angular.module('app.controllers', [])
         $scope.navigation =
             open: false
 
-        $scope.main =
-            brand: 'Slim'
-            name: 'Lisa Doe' # those which uses i18n directive can not be replaced for now.
-
-
         $scope.pageTransitionOpts = [
             name: 'Fade up'
             class: 'animate-fade-up'
@@ -29,37 +24,42 @@ angular.module('app.controllers', [])
             name: 'Flip Y'
             class: 'animate-flip-y'
         ]
+])
 
-        $scope.admin =
-            layout: 'wide'                                  # 'boxed', 'wide'
-            menu: 'vertical'                                # 'horizontal', 'vertical'
-            fixedHeader: true                               # true, false
-            fixedSidebar: true                              # true, false
-            pageTransition: $scope.pageTransitionOpts[0]    # unlimited, check out "_animation.scss"
-            skin: '11'                                      # 11,12,13,14,15,16; 21,22,23,24,25,26;; 31,32,33,34,35,36
 
-        $scope.$watch('admin', (newVal, oldVal) ->
-            # manually trigger resize event to force morris charts to resize, a significant performance impact, enable for demo purpose only
-            # if newVal.menu isnt oldVal.menu || newVal.layout isnt oldVal.layout
-            #      $window.trigger('resize')
+# Add 'active' class to li based on url, muli-level supported, jquery free
+.directive('highlightActive', [ ->
+    return {
+        restrict: "A"
+        controller: [
+            '$scope', '$element', '$attrs', '$location'
+            ($scope, $element, $attrs, $location) ->
+                links = $element.find('a')
+                path = () ->
+                    return $location.path()
 
-            if newVal.menu is 'horizontal' && oldVal.menu is 'vertical'
-                 $rootScope.$broadcast('nav:reset')
-                 return
-            if newVal.fixedHeader is false && newVal.fixedSidebar is true
-                if oldVal.fixedHeader is false && oldVal.fixedSidebar is false
-                    $scope.admin.fixedHeader = true
-                    $scope.admin.fixedSidebar = true
-                if oldVal.fixedHeader is true && oldVal.fixedSidebar is true
-                    $scope.admin.fixedHeader = false
-                    $scope.admin.fixedSidebar = false
-                return
-            if newVal.fixedSidebar is true
-                $scope.admin.fixedHeader = true
-            if newVal.fixedHeader is false
-                $scope.admin.fixedSidebar = false
+                highlightActive = (links, path) ->
+                    path = '#' + path
 
-            return
-        , true)
+                    angular.forEach(links, (link) ->
+                        $link = angular.element(link)
+                        $li = $link.parent('li')
+                        href = $link.attr('href')
 
+                        if ($li.hasClass('active'))
+                            $li.removeClass('active')
+                        if path.indexOf(href) is 0
+                            $li.addClass('active')
+                    )
+
+                highlightActive(links, $location.path())
+
+                $scope.$watch(path, (newVal, oldVal) ->
+                    if newVal is oldVal
+                        return
+                    highlightActive(links, $location.path())
+                )
+        ]
+
+    }
 ])

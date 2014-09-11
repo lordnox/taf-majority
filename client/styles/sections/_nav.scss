@@ -1,7 +1,7 @@
 
 $menu-background: #bbb;
 $menu-bordercolor: #333;
-$menu-font-color-active: #aaa;
+$menu-font-color-active: #f99501;
 $menu-font-background: #fff;
 $menu-trigger-color: $menu-bordercolor;
 $menu-trigger-color-open: $menu-font-background;
@@ -18,7 +18,11 @@ body {
     font-size: 0.6em;
   }
   .view-container {
-    padding: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
   }
 }
 
@@ -125,6 +129,7 @@ body {
           &:before {
             color: $menu-background;
             font-size: 48px;
+            display: block;
             @include transition(color 0.2s);
           }
 
@@ -133,6 +138,7 @@ body {
             color: $menu-font-background;
           }
         }
+
         &.active a {
           &:before {
             color: $menu-font-color-active;

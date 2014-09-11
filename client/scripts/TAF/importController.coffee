@@ -48,6 +48,8 @@ findCouples = (test) ->
         , 'i'
   dances = XRegExp.exec test, exp, pos
 
+  return if not dances
+
   expStr = '(?<place>[1-8])\\.\\s+' +
            '(?<points>\\d+)\\s+' +
            '(?<names>[\\p{L}\\p{N}\\s-\\/]+)' +
@@ -124,50 +126,7 @@ angular.module('taf.controller.import', ['ngStorage'])
         tournaments: []
       $sessionStorage.$default
         tournament: {}
-      $scope.text = 'TAF Westdeutsche Meisterschaft Discofox - Tanzen im Dreiländereck 2014
-
-Am 14.06.2014 in Aachen.
-Hgr. C Discofox          markierte Paare erhalten eine Platzierung
-
-Endergebnis
-Platz Starter / Institution
-Endrunde  Df  PZ
-1.  22  Marie-Luise Planert / Christopher Mettken (11)
-TSC Imperial Mülheim an der Ruhr e.V., Mülheim an der Ruhr  32211
-1.0 1.0
-2.  20  Henning Schall / Lena Thometzek (13)
-TanzTreff Jülich, Titz  11423
-2.0 2.0
-3.  18  Tobias Wegner / Leonie Hackenberg (94)
-Turnverein Cannstatt 1846 e.V., Stuttgart 23154
-3.0 3.0
-4.  16  Sebastian Wittgens / Kristina Pickartz (17)
-TSC Grün-Weiss Aquisgrana Aachen, Aachen  44342
-4.0 4.0
-5.  14  Lutz Menzel / Sandra Forejt (9)
-Tanz-Turnier-Club Oberhausen e. V., Oberhausen  55535
-5.0 5.0
-6.  12  Dirk Kietzmann / Melanie Kietzmann (8)
-Tanz-Turnier-Club Oberhausen e. V., Oberhausen  66666
-6.0 6.0
-1. Zwischenrunde
-7.  10  Hartmut Wolf / Susanne Wolf (18)  ADTV-Club-Tanzschule Geza Lang, Lüdenscheid
-8.-11.  6 Patrick Gerber / Stephanie Gerber (6) TC Seidenstadt e.V., Krefeld
-8.-11.  6 Frank Herzog / Heidrun Herzog (7) TSG Baunatal TSA des GSV Eintracht und KSV Baunatal, Baunatal
-8.-11.  6 Frank Rößler / Birgit Kirchhelle (12) Tanzsportclub Dortmund e.V., Dortmund
-8.-11.  6 Ilona Tremmel / Hans Tremmel (15) ADTV Tanzschule Harry Hagen, Bietigheim-Bissingen
-Hoffnungsrunde
-12.
-
-0
-
-Anke Strietzel / Kevin Abel (14)  ADTV Tanzschule Mettler, Oberhausen
-
-Wertungsrichter
-Eren Dogan (EDanceFever), Silvia Kreuz (TC Blau Gold Solingen), Vicky Legaki (Tanzkultur), Daniel Reichling (TSC Brühl), Marco Schmitz (Tanzen wo es Spass macht Koblenz)
-Turnierleitung
-TL: Dirk Mettler (ADTV-Tanzschule Mettler), SV: Andreas Krug (RSV Seeheim)
-Diese Liste wurde mit TopTurnier für Windows V7.4b erstellt.'
+      $scope.text = ''
       $scope.data = {}
       $scope.updateData $scope.text
 
