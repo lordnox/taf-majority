@@ -1,0 +1,10 @@
+{
+  "server": {
+    "port": 3000,
+    "path": "server"
+  },
+  "client": {
+    "src": "src/**",
+    "dest": "app"
+  }
+}

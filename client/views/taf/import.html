@@ -1,0 +1,79 @@
+<div class="page container body-taf" ng-controller="tafImportCtrl">
+    <div class="row">
+        <h2>Importieren von Turnierergebnissen</h2>
+
+        <div class="col-xs-12">
+          <textarea ng-model="text" ng-change="updateData(text)"></textarea>
+          <button ng-click="text=''">Textfeld Löschen</button>
+          <button ng-click="reset()">Session reset</button>
+
+        </div>
+
+        <div class="col-xs-12" ng-if="data && data.couples.length">
+          <table class="table table-striped taf-tournament-table">
+            <thead>
+              <th>Platz</th>
+              <th>Name</th>
+              <th>Slow</th>
+              <th>Quick</th>
+            </thead>
+            <tbody>
+              <tr class="heading">
+                <td colspan="4">{{data.information.title}} <span class="date">{{data.information.date}}</span></td>
+              </tr>
+              <tr ng-repeat="judge in data.judges">
+                <td>&nbsp;<i>{{judge.letter}}</i></td>
+                <td>{{judge.name}}</td>
+                <td colspan="2">{{judge.club}}</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr ng-repeat="couple in data.couples">
+                <td>{{couple.place}} - {{couple.PZ}}</td>
+                <td>{{couple.names.follower}} / {{couple.names.leader}}</td>
+                <td taf-ratings="couple.SD.values" taf-judges="data.judges"></td>
+                <td taf-ratings="couple.DF.values" taf-judges="data.judges"></td>
+               </tr>
+            </tbody>
+          </table>
+          <button class="btn btn-block btn-success" ng-click="import(data)">Eintragen</button>
+        </div>
+
+        <table class="col-xs-12 table table-striped taf-tournament-table">
+          <thead>
+            <th>#</th>
+            <th>Platz</th>
+            <th>Name</th>
+            <th>Slow</th>
+            <th>Quick</th>
+            <th>
+              <span tooltip="Entfernen" class="glyphicon glyphicon-remove"></span>
+              <span tooltip="Laden" class="glyphicon glyphicon-arrow-right"></span>
+            </th>
+          </thead>
+          <tbody ng-repeat="(index, tournament) in lStore.tournaments">
+            <tr class="heading">
+              <td class="index" ng-click="toggleOpen(index)">{{index + 1}}</td>
+              <td class="information" colspan="4" ng-click="toggleOpen(index)">{{tournament.information.title}} <span class="date">{{data.information.date}}</span></td>
+              <td class="action">
+                <span tooltip="Entfernen!" class="glyphicon glyphicon-remove" ng-click="remove(index, $event)"></span>
+                <span tooltip="Laden" class="glyphicon glyphicon-arrow-right" ng-click="load(tournament)"></span>
+              </th>
+            </tr>
+            <tr ng-show="isOpen(index)" ng-repeat="couple in tournament.couples">
+              <td></td>
+              <td class="place">{{couple.place}} - {{couple.PZ}}</td>
+              <td>{{couple.names.follower}} / {{couple.names.leader}}</td>
+              <td taf-ratings="couple.SD.values" taf-judges="data.judges"></td>
+              <td taf-ratings="couple.DF.values" taf-judges="data.judges"></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <button ng-click="reset()">Reset</button>
+      </div>
+    </div>
+</div>

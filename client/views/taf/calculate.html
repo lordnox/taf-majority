@@ -1,0 +1,58 @@
+<div class="page container" ng-controller="tafCalculationCtrl">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Slow</h2>
+      <a class="btn btn-primary" ng-click="calculate()">Berechnen</a>
+
+      <table class="table table-striped">
+        <thead>
+          <th >Paar</th>
+          <th>Wertungen</th>
+          <th>Calc</th>
+          <th>Platz</th>
+        </thead>
+        <tbody class="taf-input" ng-class="{error: hasErrors(tournament)}" ng-repeat="tournament in lStore.tournaments">
+          <tr>
+            <td colspan="4" ng-bind="tournament.information.title" ng-click="tournament.isClosed=!tournament.isClosed"></td>
+          </tr>
+          <tr ng-repeat="(index, couple) in tournament.couples" ng-hide="tournament.isClosed">
+            <td class="name">
+              <div class="col-xs-2" ng-bind="index"></div>
+              <div class="col-xs-10"><div class="row">
+                <div class="col-xs-12" tooltip="Leader">
+                  <span ng-bind="couple.names.leader"/>
+                </div>
+                <div class="col-xs-12" tooltip="Follower">
+                  <span ng-bind="couple.names.follower"/>
+                </div>
+              </div></div>
+            <td class="value row">
+              <div class="col-xs-12">
+                <span ng-repeat="value in couple.SD.values track by $index" ng-bind="value" />
+              </div>
+              <div class="col-xs-12">
+                <span ng-repeat="value in couple.DF.values track by $index" ng-bind="value" />
+              </div>
+            </td>
+            <td>
+              <div class="col-xs-12" tooltip="{{tournament.calculation.SD.couples[index].reason}}">
+                SD: <span ng-bind="couple.SD.place"/>
+              </div>
+              <div class="col-xs-12" tooltip="{{tournament.calculation.DF.couples[index].reason}}">
+                DF: <span ng-bind="couple.DF.place"/>
+              </div>
+            </td>
+            <td>
+              <div class="col-xs-12">
+                SD: <span ng-bind="couple.SD.pz" />
+              </div>
+              <div class="col-xs-12">
+                DF: <span ng-bind="couple.DF.pz" />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

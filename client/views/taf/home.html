@@ -1,0 +1,105 @@
+<div class="page container body-taf" ng-controller="tafApplicationCtrl">
+  <div class="row">
+    <h2>{{store.tournament.information.title || 'Finaleingabe'}}</h2>
+
+    <div class="group">
+      <div>
+        <span>Slow Discofox: </span><label class="ui-switch"><input ng-model="settings.slow" type="checkbox"><i></i></label>
+      </div>
+      <div>
+        <span>Quick Discofox: </span><label class="ui-switch"><input ng-model="settings.quick" type="checkbox"><i></i></label>
+      </div>
+      <div>
+        <span>Kür Discofox: </span><label class="ui-switch"><input ng-model="settings.kuer" type="checkbox"><i></i></label>
+      </div>
+      <div>
+        <input type="text" ng-model="input.judgeCount">
+      </div>
+      <div>
+        <input type="text" ng-model="input.couplesCount">
+      </div>
+    </div>
+
+
+    <table class="table table-striped">
+      <thead>
+        <th colspan="2">Paar</th>
+        <th colspan="{{input.judges.length}}">Wertungen</th>
+        <th>PZ</th>
+        <th>Platz</th>
+      </thead>
+      <tbody class="taf-input">
+        <tr>
+          <td class="name" ng-attr-rowspan="{{rows() + 1}}">
+            <input type="text" ng-model="input.couple.leader">
+            <input type="text" ng-model="input.couple.follower">
+          </td>
+          <td class="line" ng-attr-colspan="{{judgeCount + 2}}"></td>
+          <td class="place" rowspan="{{rows() + 1}}">
+            <a class="btn btn-success btn-block" ng-click="addCouple(input.couple)">+</a>
+          </td>
+        </tr>
+        <tr ng-if="settings.slow">
+          <td>Slow</td>
+          <td class="value" ng-repeat="(index, value) in input.judges">
+            <input radial-select="input.couples" radial-width="{{settings.radialWidth}}" radial-border="{{settings.radialBorder}}" class="col-xs-12" type="text" ng-model="input.couple.SD.values[index]">
+          </td>
+          <td>{{couple.SD.pz}}</td>
+        </tr>
+        <tr ng-if="settings.quick">
+          <td>Quick</td>
+          <td class="value" ng-repeat="(index, value) in input.judges">
+            <input radial-select="input.couples" radial-width="{{settings.radialWidth}}" radial-border="{{settings.radialBorder}}" class="col-xs-12" type="text" ng-model="input.couple.DF.values[index]">
+          </td>
+          <td>{{couple.DF.pz}}</td>
+        </tr>
+        <tr ng-if="settings.kuer">
+          <td>Kür</td>
+          <td class="value" ng-repeat="(index, value) in input.judges">
+            <input radial-select="input.couples" radial-width="{{settings.radialWidth}}" radial-border="{{settings.radialBorder}}" class="col-xs-12" type="text" ng-model="input.couple.KR.values[index]">
+          </td>
+          <td>{{couple.KR.pz}}</td>
+        </tr>
+      </tbody>
+      <tbody class="taf-input" ng-repeat="couple in store.tournament.couples">
+        <tr>
+          <td class="name" ng-attr-rowspan="{{rows() + 1}}">
+            <input type="text" ng-model="couple.names.leader">
+            <input type="text" ng-model="couple.names.follower">
+          </td>
+          <td class="line" ng-attr-colspan="{{judgeCount + 2}}"></td>
+          <td class="place" ng-attr-rowspan="{{rows() + 1}}">{{couple.place}} [{{couple.PZ}}]</td>
+        </tr>
+        <tr ng-if="settings.slow">
+          <td>Slow</td>
+          <td class="value" ng-repeat="(index, value) in store.tournament.judges">
+            <div tooltip="{{value.name}}">
+              <input radial-select="input.couples" radial-width="{{settings.radialWidth}}" radial-border="{{settings.radialBorder}}" class="col-xs-12" type="text" ng-model="couple.SD.values[index]">
+            </div>
+          </td>
+          <td>{{couple.SD.pz}}</td>
+        </tr>
+        <tr ng-if="settings.quick">
+          <td>Quick</td>
+          <td class="value" ng-repeat="(index, value) in store.tournament.judges">
+            <div tooltip="{{value.name}}">
+              <input radial-select="input.couples" radial-width="{{settings.radialWidth}}" radial-border="{{settings.radialBorder}}" class="col-xs-12" type="text" ng-model="couple.DF.values[index]">
+            </div>
+          </td>
+          <td>{{couple.DF.pz}}</td>
+        </tr>
+        <tr ng-if="settings.kuer">
+          <td>Kür</td>
+          <td class="value" ng-repeat="(index, value) in store.tournament.judges">
+            <div tooltip="{{value.name}}">
+              <input radial-select="input.couples" radial-width="{{settings.radialWidth}}" radial-border="{{settings.radialBorder}}" class="col-xs-12" type="text" ng-model="couple.KR.values[index]">
+            </div>
+          </td>
+          <td>{{couple.KR.pz}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div type="text" radial-select="numbers" ng-model="value" />
+  </div>
+</div>

@@ -1,0 +1,166 @@
+
+.radial-select.wrapper {
+  position: relative;
+  display: inherit;
+}
+
+.radial-select-component {
+  $gradient-start: 35%;
+  $gradient-start-color: #555;
+  $background-color: rgba(0,0,0,0.05);
+  $anchor-background-color: #222;
+  $anchor-background-color-active: #833;
+  $transition-time: .1s;
+  $transition-delay: 0;
+
+  @include transition(all $transition-time ease $transition-delay);
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  margin: -100px 0 0 -100px;
+  position: absolute;
+  border-radius: 100%;
+  background: rgba(0, 0, 0, 0);
+  z-index: 0;
+  box-shadow: none;
+  @include opacity(0);
+  @include scale(0);
+
+  .radial-select.input input {
+    padding: 0 0 0 0.3em;
+    color: black;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+  }
+
+  & {
+    .wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      border-radius: 100%;
+      overflow: hidden;
+
+      pointer-events: none;
+
+      ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        li {
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          overflow: hidden;
+          width: 100%;
+          height: 100%;
+          font-size: 1.5em;
+          pointer-events: none;
+          border-radius: 15%;
+          @include transform-origin(100% 100%);
+
+          a {
+            position: absolute;
+            right: -50%;
+            bottom: -50%;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: $gradient-start-color;
+            @include radial-gradient(transparent 35%, $anchor-background-color 35%);
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2em;
+            line-height: 2;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            pointer-events: auto;
+
+            &:hover, &:active, &:focus {
+              @include radial-gradient(transparent 5%, $anchor-background-color-active 35%);
+            }
+
+            span {
+              position: relative;
+              top: 1.8em;
+              display: block;
+              font-size: .5em;
+              font-weight: 700;
+              text-transform: uppercase;
+            }
+          }
+
+          &.active a {
+            @include radial-gradient(transparent 30%, $anchor-background-color-active 35%);
+          }
+        }
+      }
+    }
+
+    &.opened {
+      background: $background-color;
+      z-index: 1;
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+
+      @include opacity(1);
+      @include scale(1);
+
+      .wrapper {
+        pointer-events: auto;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .no-csstransforms li {
+    width: 4em;
+    height: 4em;
+    line-height: 4em;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .no-ccstransforms .cn-wrapper {
+    padding: .5em;
+  }
+
+  .no-csstransforms .cn-wrapper li {
+    width: 4em;
+    height: 4em;
+    font-size: .9em;
+    line-height: 4em;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .csstransforms .cn-wrapper {
+    font-size: .68em;
+  }
+
+  .cn-button {
+    font-size: 1em;
+  }
+}
+
+@media only screen and (max-width:420px) {
+  .no-csstransforms .cn-wrapper li {
+    width: 100%;
+    height: 3em;
+    line-height: 3em;
+  }
+}
