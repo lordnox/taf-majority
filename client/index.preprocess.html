@@ -1,0 +1,43 @@
+<!doctype html>
+<!--[if lt IE 8]><html class="no-js lt-ie8"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <title>Web Application</title>
+    <meta name="description" content="Responsive Admin Web App">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- @if TASK='preprocess-prod' -->
+      <script src="some/production/lib/like/analytics.js"></script>
+    <!-- @endif -->
+    <!-- @if TASK='preprocess-dev' -->
+<!-- @echo style.css -->
+    <!-- @endif -->
+  </head>
+  <body data-ng-app="app"
+      id="app"
+      class="app"
+      data-ng-controller="AppCtrl"
+      >
+    <!--[if lt IE 9]>
+      <div class="lt-ie9-bg">
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser.</p>
+        <p>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      </div>
+    <![endif]-->
+
+    <aside data-ng-include=" 'views/nav.html' " class="nav-container"></aside>
+
+    <div class="content-container" data-ng-class="{small: navigation.open}">
+      <section data-ng-view class="view-container {{admin.pageTransition.class}}"></section>
+    </div>
+
+    <!-- @if TASK='preprocess-dev' -->
+<!-- @echo bower.js -->
+
+<!-- @echo app.js -->
+    <!-- @endif -->
+
+  </body>
+</html>

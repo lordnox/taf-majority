@@ -8,19 +8,8 @@
     <meta name="description" content="Responsive Admin Web App">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300,700' rel='stylesheet' type='text/css'> -->
-    <!-- Needs images, font... therefore can not be part of main.css -->
     <link rel="stylesheet" href="fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="fonts/weather-icons/css/weather-icons.css">
-    <!-- end Needs images -->
-
-
-      <!-- build:css({.tmp,client}) styles/main.css -->
-      <link rel="stylesheet" href="styles/bootstrap.css">
-      <link rel="stylesheet" href="styles/ui.css">
-      <link rel="stylesheet" href="styles/main.css">
-      <!-- endbuild -->
-
   </head>
   <body data-ng-app="app"
       id="app"
@@ -40,39 +29,30 @@
       <section data-ng-view class="view-container {{admin.pageTransition.class}}"></section>
     </div>
 
+    <script src='bower_components/jquery/dist/jquery.js'></script>
+    <script src='bower_components/angular/angular.js'></script>
+    <script src='bower_components/angular-route/angular-route.js'></script>
+    <script src='bower_components/angular-animate/angular-animate.js'></script>
+    <script src='bower_components/angular-bootstrap/ui-bootstrap-tpls.js'></script>
+    <script src='bower_components/jquery-spinner/dist/jquery.spinner.js'></script>
+    <script src='bower_components/bootstrap-file-input/bootstrap.file-input.js'></script>
+    <script src='bower_components/jquery.slimscroll/jquery.slimscroll.js'></script>
+    <script src='bower_components/angular-ui-tree/dist/angular-ui-tree.js'></script>
+    <script src='bower_components/ngmap/build/scripts/ng-map.js'></script>
+    <script src='bower_components/ng-tags-input/ng-tags-input.js'></script>
+    <script src='bower_components/ngstorage/ngStorage.js'></script>
+    <script src='bower_components/xregexp/xregexp-all.js'></script>
 
-    <!-- build:js scripts/vendor.js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <!-- endbuild -->
-
-    <!-- build:js scripts/ui.js -->
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/jquery-spinner/dist/jquery.spinner.js"></script>
-    <script src="bower_components/bootstrap-file-input/bootstrap.file-input.js"></script>
-    <script src="bower_components/jquery.slimscroll/jquery.slimscroll.js"></script>
-    <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
-    <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
-    <script src="bower_components/ng-tags-input/ng-tags-input.js"></script>
-    <script src="bower_components/ngstorage/ngStorage.js"></script>
-    <script src="bower_components/xregexp/xregexp-all.js"></script>
-    <!-- endbuild -->
-
-    <!-- build:js({.tmp,client}) scripts/app.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/shared/main.js"></script>
-    <script src="scripts/shared/localize.js"></script>
-    <script src="scripts/Components/radialSelect.js"></script>
-    <script src="scripts/Components/tafRatings.js"></script>
-    <script src="scripts/TAF/taf.js"></script>
-    <script src="scripts/TAF/applicationController.js"></script>
-    <script src="scripts/TAF/importController.js"></script>
-    <script src="scripts/TAF/calculationController.js"></script>
-
-    <script src="scripts/TAF/calculationService.js"></script>
-    <script src="scripts/TAF/tournamentService.js"></script>
-    <!-- endbuild -->
+    <script src='scripts/app.js'></script>
+    <script src='scripts/shared/main.js'></script>
+    <script src='scripts/shared/localize.js'></script>
+    <script src='scripts/Components/radialSelect.js'></script>
+    <script src='scripts/Components/tafRatings.js'></script>
+    <script src='scripts/TAF/taf.js'></script>
+    <script src='scripts/TAF/applicationController.js'></script>
+    <script src='scripts/TAF/importController.js'></script>
+    <script src='scripts/TAF/calculationController.js'></script>
+    <script src='scripts/TAF/calculationService.js'></script>
+    <script src='scripts/TAF/tournamentService.js'></script>
   </body>
 </html>

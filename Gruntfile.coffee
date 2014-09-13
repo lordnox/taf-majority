@@ -23,6 +23,10 @@ module.exports = (grunt) ->
 
   try
     yeomanConfig.app = require("./bower.json").appPath or yeomanConfig.app
+
+  try
+    project = require("./project.json")
+
   grunt.initConfig
     yeoman: yeomanConfig
     watch:
@@ -51,6 +55,14 @@ module.exports = (grunt) ->
           "{.tmp,<%= yeoman.app %>}/scripts/**/*.js"
           "<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}"
         ]
+
+    preprocess:
+        prod:
+            src: "client/index.preprocess.html"
+            dest: "client/index.html"
+        dev:
+            src: "client/index.preprocess.html"
+            dest: "client/index.html"
 
     connect:
       options:
@@ -307,6 +319,31 @@ module.exports = (grunt) ->
             "<%= yeoman.app %>/scripts/**/*.js"
             "!<%= yeoman.app %>/scripts/vendors/**"
           ]
+
+  grunt.registerTask "process:dev", ->
+    process.env.TASK = 'preprocess-dev';
+
+    return if not (project and project.files)
+
+    for file, files of project.files
+      [filename, base] = file.split ":"
+      bLen = base.length
+
+      Path = require 'path'
+      ext = Path.extname filename
+      console.log ext
+      switch ext
+        when ".css"
+          tpl = "    <link rel=\"stylesheet\" href=\"%file%\">";
+        else
+          tpl = "    <script src='%file%'></script>";
+
+      tags = grunt.file.expand(files).map (v) ->
+        return tpl.replace "%file%", v.substr(bLen)
+
+      process.env[filename] = tags.join("\n");
+
+    grunt.task.run "preprocess:dev"
 
 
   grunt.registerTask "server", (target) ->

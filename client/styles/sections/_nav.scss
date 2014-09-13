@@ -14,7 +14,7 @@ body {
   @include transition(all .4s);
 
   &.small {
-    padding: 10px 80px 0 0;
+    padding: 30px 90px 30px 10px;
     font-size: 0.6em;
   }
   .view-container {

@@ -6,5 +6,41 @@
   "client": {
     "src": "src/**",
     "dest": "app"
+  },
+  "files": {
+    "bower.js:client/": [
+      "client/bower_components/jquery/dist/jquery.js",
+      "client/bower_components/angular/angular.js",
+      "client/bower_components/angular-route/angular-route.js",
+      "client/bower_components/angular-animate/angular-animate.js",
+      "client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
+      "client/bower_components/jquery-spinner/dist/jquery.spinner.js",
+      "client/bower_components/bootstrap-file-input/bootstrap.file-input.js",
+      "client/bower_components/jquery.slimscroll/jquery.slimscroll.js",
+      "client/bower_components/angular-ui-tree/dist/angular-ui-tree.js",
+      "client/bower_components/ngmap/build/scripts/ng-map.js",
+      "client/bower_components/ng-tags-input/ng-tags-input.js",
+      "client/bower_components/ngstorage/ngStorage.js",
+      "client/bower_components/xregexp/xregexp-all.js"
+    ],
+    "app.js:.tmp/": [
+      ".tmp/scripts/app.js",
+      ".tmp/scripts/shared/main.js",
+      ".tmp/scripts/shared/localize.js",
+      ".tmp/scripts/Components/radialSelect.js",
+      ".tmp/scripts/Components/tafRatings.js",
+      ".tmp/scripts/TAF/taf.js",
+      ".tmp/scripts/TAF/applicationController.js",
+      ".tmp/scripts/TAF/importController.js",
+      ".tmp/scripts/TAF/calculationController.js",
+      ".tmp/scripts/TAF/calculationService.js",
+      ".tmp/scripts/TAF/tournamentService.js"
+    ],
+    "style.css:client/": [
+      "client/fonts/themify-icons/themify-icons.css",
+      "client/fonts/weather-icons/css/weather-icons.css",
+      "client/styles/bootstrap.css",
+      "client/styles/main.css"
+    ]
   }
 }
