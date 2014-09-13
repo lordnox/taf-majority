@@ -162,6 +162,11 @@ module.exports = (grunt) ->
         ]
 
 
+    "gh-pages":
+      options:
+        base: "<%= yeoman.dist %>"
+      src: ["**"]
+
     coffee:
       server:
         options:
@@ -222,7 +227,7 @@ module.exports = (grunt) ->
         files: [
           expand: true
           cwd: "<%= yeoman.app %>"
-          src: ["*.html", "views/*.html"]
+          src: ["*.html", "views/*.html", "!index.preprocess.html"]
           dest: "<%= yeoman.dist %>"
         ]
 
