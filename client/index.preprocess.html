@@ -8,12 +8,10 @@
     <meta name="description" content="Responsive Admin Web App">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <!-- @if TASK='preprocess-prod' -->
-      <script src="some/production/lib/like/analytics.js"></script>
-    <!-- @endif -->
-    <!-- @if TASK='preprocess-dev' -->
+<!-- @echo vendor.css -->
+    <!-- build:css({.tmp,client}) styles/main.css -->
 <!-- @echo style.css -->
-    <!-- @endif -->
+    <!-- endbuild -->
   </head>
   <body data-ng-app="app"
       id="app"
@@ -33,11 +31,13 @@
       <section data-ng-view class="view-container {{admin.pageTransition.class}}"></section>
     </div>
 
-    <!-- @if TASK='preprocess-dev' -->
+    <!-- build:js scripts/vendor.js -->
 <!-- @echo bower.js -->
+    <!-- endbuild -->
 
+    <!-- build:js({.tmp,client}) scripts/app.js -->
 <!-- @echo app.js -->
-    <!-- @endif -->
+    <!-- endbuild -->
 
   </body>
 </html>

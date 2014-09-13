@@ -57,12 +57,9 @@ module.exports = (grunt) ->
         ]
 
     preprocess:
-        prod:
-            src: "client/index.preprocess.html"
-            dest: "client/index.html"
-        dev:
-            src: "client/index.preprocess.html"
-            dest: "client/index.html"
+      dev:
+        src: "client/index.preprocess.html"
+        dest: "client/index.html"
 
     connect:
       options:
@@ -320,10 +317,10 @@ module.exports = (grunt) ->
             "!<%= yeoman.app %>/scripts/vendors/**"
           ]
 
-  grunt.registerTask "process:dev", ->
-    process.env.TASK = 'preprocess-dev';
-
-    return if not (project and project.files)
+  grunt.registerTask "process", ->
+    if not (project and project.files)
+      grunt.log.error "no project data found to process"
+      return
 
     for file, files of project.files
       [filename, base] = file.split ":"
@@ -335,15 +332,18 @@ module.exports = (grunt) ->
       switch ext
         when ".css"
           tpl = "    <link rel=\"stylesheet\" href=\"%file%\">";
-        else
+        else # assume javascript file
           tpl = "    <script src='%file%'></script>";
 
       tags = grunt.file.expand(files).map (v) ->
         return tpl.replace "%file%", v.substr(bLen)
 
       process.env[filename] = tags.join("\n");
+      console.log process.env[filename]
 
-    grunt.task.run "preprocess:dev"
+    console.log process.env
+
+    grunt.task.run "preprocess"
 
 
   grunt.registerTask "server", (target) ->

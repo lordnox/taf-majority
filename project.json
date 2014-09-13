@@ -36,11 +36,13 @@
       ".tmp/scripts/TAF/calculationService.js",
       ".tmp/scripts/TAF/tournamentService.js"
     ],
-    "style.css:client/": [
+    "vendor.css:client/": [
       "client/fonts/themify-icons/themify-icons.css",
-      "client/fonts/weather-icons/css/weather-icons.css",
-      "client/styles/bootstrap.css",
-      "client/styles/main.css"
+      "client/fonts/weather-icons/css/weather-icons.css"
+    ],
+    "style.css:.tmp/": [
+      ".tmp/styles/bootstrap.css",
+      ".tmp/styles/main.css"
     ]
   }
 }
