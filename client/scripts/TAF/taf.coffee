@@ -12,6 +12,7 @@ angular.module 'taf.directives', [
 
 angular.module 'taf.services', [
   'taf.services.calculation'
+  'taf.services.tournament'
 ]
 
 angular.module 'taf', [

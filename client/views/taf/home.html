@@ -1,7 +1,7 @@
 <div class="page body-taf" ng-controller="tafApplicationCtrl">
   <div class="row">
-    <h2>{{store.tournament.information.title || 'Finaleingabe'}}</h2>
-
+    <h2>{{tournament.information.title || 'Finaleingabe'}}</h2>
+    <div><pre>{{tournament | json}}</pre></div>
     <div class="group">
       <div>
         <span>Slow Discofox: </span><label class="ui-switch"><input ng-model="settings.slow" type="checkbox"><i></i></label>

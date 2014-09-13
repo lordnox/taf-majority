@@ -114,45 +114,40 @@ test2data = (test) ->
 
 angular.module('taf.controller.import', ['ngStorage'])
 
-.controller 'tafImportCtrl', [
-  '$scope', '$sessionStorage', '$localStorage',
-  ($scope, $sessionStorage, $localStorage) ->
-    window.s = $scope;
-    $scope.lStore = $localStorage
-    $scope.sStore = $sessionStorage
+.controller 'tafImportCtrl', ($scope, $sessionStorage, $localStorage, tafCalculation) ->
+  $scope.lStore = $localStorage
+  $scope.sStore = $sessionStorage
 
-    init = ->
-      $localStorage.$default
-        tournaments: []
-      $sessionStorage.$default
-        tournament: {}
-      $scope.text = ''
-      $scope.data = {}
-      $scope.updateData $scope.text
+  init = ->
+    $localStorage.$default
+      tournaments: []
+    $sessionStorage.$default
+      tournament: {}
+    $scope.text = ''
+    $scope.data = {}
+    $scope.updateData $scope.text
 
-    $scope.open = 0
+  $scope.open = 0
 
-    $scope.isOpen = (index) -> $scope.open is index
-    $scope.toggleOpen = (index) -> $scope.open = if $scope.isOpen index then false else index
+  $scope.isOpen = (index) -> $scope.open is index
+  $scope.toggleOpen = (index) -> $scope.open = if $scope.isOpen index then false else index
 
+  $scope.updateData = (text) ->
+    $scope.data = test2data text
 
-    $scope.updateData = (text) ->
-      $scope.data = test2data text
-
-    $scope.import = (data) ->
-      $localStorage.tournaments.unshift data
-      init()
-
-    $scope.load = (tournament) ->
-      $sessionStorage.tournament = tournament
-
-    $scope.reset = ->
-      $localStorage.$reset()
-      $sessionStorage.$reset()
-      init()
-
-    $scope.remove = (index, $event) ->
-      $localStorage.tournaments.splice index, 1
-
+  $scope.import = (data) ->
+    $localStorage.tournaments.unshift data
     init()
-]
+
+  $scope.load = (tournament) ->
+    $sessionStorage.tournament = tournament
+
+  $scope.reset = ->
+    $localStorage.$reset()
+    $sessionStorage.$reset()
+    init()
+
+  $scope.remove = (index, $event) ->
+    $localStorage.tournaments.splice index, 1
+
+  init()
