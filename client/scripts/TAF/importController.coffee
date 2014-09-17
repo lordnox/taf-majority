@@ -3,7 +3,7 @@ findInfo = (test) ->
   console.log "===========> find Information"
   exp = XRegExp '(?<title>[\\p{L}\\p{N}\\s\\/]+)\\s+' +
                 'Am\\s+(?<date>\\d\\d\\.\\d\\d\\.(:?\\d\\d)?\\d\\d)\\s+' +
-                # '(?<location>[\\p{L}\\p{N}\\s\\/]+)' +
+                '(?:in)?\\s+(?<location>[\\p{L}\\p{N}\\s\\/]+)' +
                 ''
 
   match = XRegExp.exec test, exp, 0
@@ -21,7 +21,7 @@ findJudges = (test) ->
   endPos = Math.min test.length - 1, test.indexOf "Turnierleitung"
 
   exp = XRegExp '(?<name>[\\p{L}\\s]+)\\s+' +
-                '\\((?<club>[\\p{L}\\s,]+)\\)\\,?\\s+' +
+                '\\((?<club>[^\\)]+)\\)\\,?\\s+' +
                 ''
 
   matches = []
@@ -39,23 +39,23 @@ findJudges = (test) ->
 
 findCouples = (test) ->
   console.log "===========> find Couples"
-  pos = Math.max 0, test.indexOf "Endrunde"
+  pos = 0
 
   exp = XRegExp '(?<Endrunde>Endrunde)\\s+' +
-                '(?<SD>SD)?\\s+' +
-                '(?<DF>Df)?\\s+' +
-                '(?<KR>K)?\\s+'
+                '(?<SD>SD\\s+)?' +
+                '(?<DF>Df\\s+)?' +
+                '(?<KR>K\\s+)?'
         , 'i'
   dances = XRegExp.exec test, exp, pos
 
   return if not dances
 
   expStr = '(?<place>[1-8])\\.\\s+' +
-           '(?<points>\\d+)\\s+' +
+           '(?<points>\\d+|\\S+)\\s+' +
            '(?<names>[\\p{L}\\p{N}\\s-\\/]+)' +
-           '\\((?<unknown>\\d+)\\)\\s*' +
-           '(?<club>[_\\-\\.\\p{L}\\s]+),\\s' +
-           '(?<clublocation>[\\p{L}\\s-]+)\\s+'
+           '\\((?<number>\\d+)\\)\\s*' +
+           '(?<club>[_\\-\\.\\d\\p{L}\\s]+,\\s)?' +
+           '(?<clublocation>[\\p{L}\\s-\\d]+)\\s+'
 
   if dances.SD
     expStr += '(?<sdValues>\\d+)\\s+' +
@@ -123,7 +123,46 @@ angular.module('taf.controller.import', ['ngStorage'])
       tournaments: []
     $sessionStorage.$default
       tournament: {}
-    $scope.text = ''
+    $scope.text = 'TAF Süddeutsche Discofox-Meisterschaft 2014
+
+Am 13.09.2014 in Friedrichshafen.
+Hgr. B Discofox          markierte Paare erhalten eine Platzierung         markierte Paare Süd-Institution erhalten die DM Qualifikation
+
+Endergebnis
+Platz Starter / Institution
+Endrunde  SD  Df  PZ
+1.  20  Tobias Wegner / Leonie Hackenberg (24)
+Turnverein Cannstatt 1846 e.V., Stuttgart 11611
+1.0 31322
+3.0 4.0
+2.  18  Tobias Kopelke / Annika Westedt (60)
+Discofox Club Hamburg, Hamburg  33522
+3.0 22151
+1.0 4.0
+3.  OW  Urs Quaiser / Jacqueline Quaiser (3)
+International Schweiz 24233
+2.0 14213
+2.0 4.0
+4.  16  Monika Siemer / Axel Siemer (22)
+ADTV Tanzschule Harry Hagen, Bietigheim-Bissingen 45464
+4.0 63445
+4.5 8.5
+5.  14  Diemo Rohde / Jasmin Wegner (21)
+Tanz- und Sportclub Fellbach e.V., Fellbach 66345
+6.0 45634
+4.5 10.5
+6.  12  Ralf Niedner / Rosalba Musso (20)
+Tanzzentrum Allgäu, Kempten 52156
+5.0 56566
+6.0 11.0
+Vorrunde
+  Alle Paare weiter genommen.   ( )
+
+Wertungsrichter
+Melanie Grund (Tanzen wo`s Spaß macht - Koblenz), Eren Dogan (DanceFever Neu-Isenburg), Petra Esquinas-Gomez (ADTV Tanzschule Vö, Heilbronn), Martina Mroczek (RSV Seeheim 1971 e.V. Abt. DiscoFox, Seeheim-Jugenheim), Dirk Szimon (ADTV Tanzschule Harry Hagen, Bietigheim-Bissingen)
+Turnierleitung
+TL: Thomas Schütze (Tanzschule No. 10, Friedrichshafen), SV: Harry Hagen (ADTV Tanzschule Harry Hagen, Bietigheim-Bissingen)
+Diese Liste wurde mit TopTurnier für Windows V7.5b erstellt.'
     $scope.data = {}
     $scope.updateData $scope.text
 

@@ -1,15 +1,16 @@
-<div class="page body-taf" ng-controller="tafImportCtrl">
+<div class="page body-taf taf-importer" ng-controller="tafImportCtrl">
     <div class="row">
         <h2>Importieren von Turnierergebnissen</h2>
 
-        <div class="col-xs-12">
+        <div class="col-xs-12 input">
           <textarea ng-model="text" ng-change="updateData(text)"></textarea>
           <button ng-click="text=''">Textfeld Löschen</button>
           <button ng-click="reset()">Session reset</button>
+          <button ng-click="updateData(text)">cacl</button>
 
         </div>
 
-        <div class="col-xs-12" ng-if="data && data.couples.length">
+        <div class="col-xs-12" ng-if="data">
           <table class="table table-striped taf-tournament-table">
             <thead>
               <th>Platz</th>

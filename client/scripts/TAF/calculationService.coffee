@@ -5,7 +5,7 @@ angular.module('taf.services.calculation', [])
   class Calculation
     reset: ->
       @dances = ['SD', 'DF', 'KR']
-      #@dances = ['DF']
+      @dances = ['DF']
       @maxPlace = 0
       @SD =
         places: {}
@@ -35,7 +35,7 @@ angular.module('taf.services.calculation', [])
 
     placeCouple: (dance, couple, place) ->
       Couple = @tournament.couples[couple]
-      console.log 'For %s [%d] %s, %s have taken %d. place', dance, couple, Couple.names.follower, Couple.names.leader, place + 1
+      console.info '(%s:%d) Place %d goes to: %s, %s!', dance, 1+place, 1+place, Couple.names.follower, Couple.names.leader
       @[dance].places[place] = @[dance].places[place] || []
       @[dance].places[place].push couple
       @[dance].couples[couple] = place
@@ -72,11 +72,14 @@ angular.module('taf.services.calculation', [])
       obj = @getPlacementData dance, couples, place
       # run the init callback to find our target
       target = init.call obj
-      console.log target, dance, place
       if target is false
+        console.log '(%s:%d) Stepping through %s, no target found, increasing place', dance, 1+place, dance
         if place < @maxPlace
           return @stepCouples dance, couples, place + 1, basePlace, init, filter, split
         return false
+
+      console.log '(%s:%d) Stepping through %s to find %d', dance, 1+place, dance, target
+
       splitCouples = []
       restCouples = []
 
@@ -86,10 +89,13 @@ angular.module('taf.services.calculation', [])
 
       # if only one couple is found, place it
       if splitCouples.length is 1
+        console.log '(%s:%d) Found only couple %d with %d', dance, 1+place, splitCouples[0], target
         @placeCouple dance, splitCouples[0], basePlace++
         place = Math.max place, basePlace
         # re-run with the rest couples
         return 1 + @stepCouples dance, restCouples, place, basePlace, init, filter, split
+
+      console.log "(%s:%d) Found %d couples, trying next rule", dance, 1+place, splitCouples.length, splitCouples
 
       # if we have more
       split.call @, splitCouples, place, basePlace, obj
@@ -108,7 +114,9 @@ angular.module('taf.services.calculation', [])
       , ((couple, index) -> @sums[index])
       , ((couples, place, basePlace, obj) ->
           if place < @maxPlace
+            console.log "(%s:%d) Resuming with rule findMinSum [findMinSum]", dance, 1+place
             return @findMinSum dance, couples, place + 1, basePlace
+          console.log "(%s:%d) Stopping to place %d couples", dance, 1+place, couples.length
           couples.forEach (couple) =>
             @placeCouple dance, couple, basePlace
         )
@@ -124,9 +132,8 @@ angular.module('taf.services.calculation', [])
       # check max against the counts
       , ((couple, index) -> @counts[index])
       , ((couples, place, basePlace) ->
-          if place < @maxPlace
-            return @findMaxCount dance, couples, place + 1, basePlace
-          @findMinSum dance, couples, basePlace, basePlace
+          console.log "(%s:%d) Resuming with rule findMinSum [findMaxCount]", dance, 1+place
+          @findMinSum dance, couples, place, basePlace
         )
 
     findPlacement: (dance, couples, place, basePlace) ->
@@ -178,6 +185,7 @@ angular.module('taf.services.calculation', [])
         Object.keys(Dance.places).forEach (place) ->
           placement = parseInt place, 10
           placement = (1 + Dance.places[place].length) / 2 + placement
+          placement = (placement + '.0').substr 0, 3
           Dance.places[place].forEach (index) ->
             couple = couples[index]
             couple[dance].placements = Dance.placements[index]
