@@ -5,7 +5,7 @@ angular.module('taf.services.calculation', [])
   class Calculation
     reset: ->
       @dances = ['SD', 'DF', 'KR']
-      @dances = ['DF']
+      #@dances = ['DF']
       @maxPlace = 0
       @SD =
         places: {}
