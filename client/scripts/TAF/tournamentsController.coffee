@@ -13,6 +13,7 @@ angular.module('taf.controller.tournaments', ['ngStorage'])
 
   $scope.save = ->
     tafTournament.addTournament $scope.tournament
+    $scope.tournament = null
     tafTournament.emptyTournament()
     $scope.init()
 
