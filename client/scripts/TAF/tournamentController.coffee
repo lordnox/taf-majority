@@ -37,10 +37,6 @@ angular.module('taf.controller.tournament', ['ngStorage'])
     calculation = new tafCalculation tournament
     calculation.result()
 
-  tournament.dances = ['quick']
-  calculation = new tafCalculation tournament
-  #calculation.result()
-
   $scope.dance = tournament.dances[0]
   $scope.isDanceActive = (dance) -> dance is $scope.dance
 
