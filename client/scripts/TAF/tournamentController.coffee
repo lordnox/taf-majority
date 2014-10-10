@@ -40,6 +40,8 @@ angular.module('taf.controller.tournament', ['ngStorage'])
   $scope.dance = tournament.dances[0]
   $scope.isDanceActive = (dance) -> dance is $scope.dance
 
+  $scope.setDance = (dance) -> $scope.dance = dance
+
   $scope.hasIndexError = (index, dance) ->
     values = $scope.tournament.couples.map (couple) ->
       couple[dance].values[index]

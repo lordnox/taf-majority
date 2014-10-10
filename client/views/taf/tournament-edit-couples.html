@@ -2,20 +2,22 @@
 
 <div class="row">
   <form role="form" ng-submit="addCouple(couple)">
-    <div class="form-group">
+    <div class="col-xs-12 form-group">
       <label for="coupleNumber">Startnummer:</label>
-      <input type="text" class="form-control" id="coupleNumber" placeholder="Startnummer" ng-model="couple.number">
+      <input type="number" class="form-control" id="coupleNumber" placeholder="Startnummer" ng-model="couple.number">
     </div>
-    <div class="form-group">
+    <div class="col-xs-12 form-group">
       <label for="coupleLeader">Herr:</label>
       <input type="text" class="form-control" id="coupleLeader" placeholder="Herr" ng-model="couple.leader">
     </div>
-    <div class="form-group">
+    <div class="col-xs-12 form-group">
       <label for="coupleFollower">Dame:</label>
       <input type="text" class="form-control" id="coupleFollower" placeholder="Dame" ng-model="couple.follower">
     </div>
 
-    <input type="submit" class="btn-block btn btn-primary" value="Hinzufügen">
+    <div class="col-xs-12">
+      <input type="submit" class="btn-block btn btn-success" value="Hinzufügen">
+    </div>
   </form>
 </div>
 

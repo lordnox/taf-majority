@@ -2,7 +2,7 @@
 
 <div class="row">
   <form role="form" ng-submit="addJudge(judge)">
-    <div class="form-group">
+    <div class="col-xs-12 form-group">
       <label for="judgeName">Buchstabe:</label>
       <input type="text" class="form-control" id="judgeName" placeholder="Name" ng-model="judge.letter">
     </div>
@@ -11,7 +11,9 @@
       <input type="text" class="form-control" id="judgeName" placeholder="Name" ng-model="judge.name">
     </div>
 
-    <input type="submit" class="btn-block btn btn-primary" value="Hinzufügen">
+    <div class="col-xs-12">
+      <input type="submit" class="btn-block btn btn-success" value="Hinzufügen">
+    </div>
   </form>
 </div>
 

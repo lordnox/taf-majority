@@ -8,8 +8,9 @@
         </div>
       </form>
     </div>
+
     <div class="col-xs-12">
-      <a class="btn btn-block" ng-click="reset()">Session Reset</a>
+      <input type="submit" class="btn-block btn btn-success" value="Hinzufügen">
     </div>
   </div>
 
@@ -28,6 +29,7 @@
     </tbody>
   </table>
 
-  <pre>{{tournaments | json}}
-  </pre>
+  <div class="col-xs-12">
+    <a class="btn btn-block btn-danger" ng-click="reset()"><span class="glyphicon glyphicon-flash"></span>Session Reset</a>
+  </div>
 </div>
