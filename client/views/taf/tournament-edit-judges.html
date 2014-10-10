@@ -22,8 +22,12 @@
   </thead>
   <tbody>
     <tr ng-repeat="judge in tournament.judges">
-      <td ng-bind="judge.letter"></td>
-      <td ng-bind="judge.name"></td>
+      <td>
+        <input class="taf-value-entry" type="text" ng-model="judge.letter">
+      </td>
+      <td>
+        <input type="text" ng-model="judge.name">
+      </td>
     </tr>
   </tbody>
 </table>

@@ -1,5 +1,11 @@
 <h2>Endrunde!</h2>
 
+<div class="col-xs-12 btn-group">
+  <a ng-click="dance='slow'"  ng-if="hasDance('slow')"  class="btn btn-primary" ng-class="{ 'active': dance=='slow', 'col-xs-4': tournament.dances.length==3, 'col-xs-6': tournament.dances.length==2, 'col-xs-12': tournament.dances.length==1 }">Slow</a>
+  <a ng-click="dance='quick'" ng-if="hasDance('quick')" class="btn btn-primary" ng-class="{ 'active': dance=='quick', 'col-xs-4': tournament.dances.length==3, 'col-xs-6': tournament.dances.length==2, 'col-xs-12': tournament.dances.length==1 }">Quick</a>
+  <a ng-click="dance='kuer'"  ng-if="hasDance('kuer')"  class="btn btn-primary" ng-class="{ 'active': dance=='kuer', 'col-xs-4': tournament.dances.length==3, 'col-xs-6': tournament.dances.length==2, 'col-xs-12': tournament.dances.length==1 }">K&uuml;r</a>
+</div>
+
 <table class="table table-striped">
   <thead>
     <th>#</th>
@@ -7,10 +13,13 @@
   </thead>
   <tbody ng-repeat="dance in tournament.dances" ng-if="isDanceActive(dance)">
     <tr ng-repeat="couple in tournament.couples">
-      <td ng-bind="couple.number"></td>
+      <td>{{$index}}-{{couple.number}}</td>
       <td ng-repeat="judge in tournament.judges" ng-class="{'taf-dublicate': hasIndexError($index, dance)}">
-        <input class="taf-value-entry" type="text" ng-model="couple[dance].values[$index]">
+        <input class="taf-value-entry" ng-change="calculate()" type="number" ng-model="couple[dance].values[$index]">
       </td>
+      <td ng-bind="couple[dance].place">
     </tr>
   </tbody>
 </table>
+
+<a class="btn btn-primary col-xs-12" ng-click="calculate()">Rechne</a>

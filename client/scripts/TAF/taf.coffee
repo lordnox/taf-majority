@@ -33,12 +33,12 @@ angular.module 'taf', [
 
   .state 'taf.list',
     url: '/all'
-    templateUrl: '/views/taf/tournaments.html'
+    templateUrl: 'views/taf/tournaments.html'
     controller: 'tafTournamentsCtrl'
 
   .state 'taf.tournament',
     url: '/tournament/:id'
-    templateUrl: '/views/taf/tournament-wrapper.html'
+    templateUrl: 'views/taf/tournament-wrapper.html'
     controller: 'tafTournamentCtrl'
     abstract: true
     resolve:
@@ -48,20 +48,20 @@ angular.module 'taf', [
 
   .state 'taf.tournament.view',
     url: '/view'
-    templateUrl: '/views/taf/tournament-view.html'
+    templateUrl: 'views/taf/tournament-view.html'
     controller: 'tafTournamentCtrl'
 
   .state 'taf.tournament.editJudges',
     url: '/judges'
-    templateUrl: '/views/taf/tournament-edit-judges.html'
+    templateUrl: 'views/taf/tournament-edit-judges.html'
     controller: 'tafTournamentCtrl'
 
   .state 'taf.tournament.editCouples',
     url: '/couples'
-    templateUrl: '/views/taf/tournament-edit-couples.html'
+    templateUrl: 'views/taf/tournament-edit-couples.html'
     controller: 'tafTournamentCtrl'
 
   .state 'taf.tournament.enterRound',
     url: '/round'
-    templateUrl: '/views/taf/tournament-edit-round.html'
+    templateUrl: 'views/taf/tournament-edit-round.html'
     controller: 'tafTournamentCtrl'

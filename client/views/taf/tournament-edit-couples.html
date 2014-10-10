@@ -21,15 +21,21 @@
 
 <table class="table table-striped">
   <thead>
-    <th>Startnummer</th>
+    <th>#</th>
     <th>Herr</th>
     <th>Dame</th>
   </thead>
   <tbody>
     <tr ng-repeat="couple in tournament.couples">
-      <td ng-bind="couple.number"></td>
-      <td ng-bind="couple.leader"></td>
-      <td ng-bind="couple.follower"></td>
+      <td>
+        <input class="taf-value-entry" type="text" ng-model="couple.number">
+      </td>
+      <td>
+        <input type="text" class="col-xs-12" ng-model="couple.leader">
+      </td>
+      <td>
+        <input type="text" class="col-xs-12" ng-model="couple.follower">
+      </td>
     </tr>
   </tbody>
 </table>

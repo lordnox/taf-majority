@@ -14,15 +14,27 @@
 
 <table class="table table-striped">
   <thead>
-    <th>Startnummer</th>
+    <th>#</th>
     <th>Herr</th>
     <th>Dame</th>
+    <th class="dance-letter" ng-repeat="dance in tournament.dances">{{dance[0]}}</th>
+    <th>PZ</th>
   </thead>
   <tbody>
     <tr ng-repeat="couple in tournament.couples">
       <td ng-bind="couple.number"></td>
       <td ng-bind="couple.leader"></td>
       <td ng-bind="couple.follower"></td>
+      <td ng-if="hasDance('slow')">{{couple['slow'].place}}</td>
+      <td ng-if="hasDance('quick')">{{couple['quick'].place}}</td>
+      <td ng-if="hasDance('kuer')">{{couple['kuer'].place}}</td>
+      <td>@</td>
     </tr>
   </tbody>
 </table>
+
+<div class="col-xs-12 btn-group">
+  <a class="btn col-xs-4" ng-click="toggleDance('slow')" ng-class="{ 'btn-warning': (tournament.dances.indexOf('slow')==-1), 'btn-primary': tournament.dances.indexOf('slow')!==-1 }">Slow</a>
+  <a class="btn col-xs-4" ng-click="toggleDance('quick')" ng-class="{ 'btn-warning': (tournament.dances.indexOf('quick')==-1), 'btn-primary': tournament.dances.indexOf('quick')!==-1 }">Quick</a>
+  <a class="btn col-xs-4" ng-click="toggleDance('kuer')" ng-class="{ 'btn-warning': (tournament.dances.indexOf('kuer')==-1), 'btn-primary': tournament.dances.indexOf('kuer')!==-1 }">K&uuml;r</a>
+</div>

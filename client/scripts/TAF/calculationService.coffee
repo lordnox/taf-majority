@@ -1,27 +1,30 @@
 
 angular.module('taf.services.calculation', [])
 
-.factory 'tafCalculation', ->
+.factory 'tafCalculation', ($log) ->
   class Calculation
+    log = $log.log
+    info = $log.info
+
     reset: ->
-      @dances = ['SD', 'DF', 'KR']
+      @dances = ['slow', 'quick', 'kuer']
       #@dances = ['DF']
       @maxPlace = 0
-      @SD =
+      @slow =
         places: {}
         couples: {}
         data: []
         unplaced: {}
         placements: {}
         errors: []
-      @DF =
+      @quick =
         places: {}
         couples: {}
         data: []
         unplaced: {}
         placements: {}
         errors: []
-      @KR =
+      @kuer =
         places: {}
         couples: {}
         data: []
@@ -31,19 +34,19 @@ angular.module('taf.services.calculation', [])
 
     getUnplacedCouples: (dance) ->
       Object.keys(@[dance].unplaced).map (i) -> parseInt i, 10
-      # [1, 4, 5]
 
     placeCouple: (dance, couple, place) ->
       Couple = @tournament.couples[couple]
-      console.info '(%s:%d) Place %d goes to: %s, %s!', dance, 1+place, 1+place, Couple.names.follower, Couple.names.leader
+      info '(%s:%d) Place %d goes to: [%s] %s, %s!', dance, 1+place, 1+place, Couple.number, Couple.follower, Couple.leader
       @[dance].places[place] = @[dance].places[place] || []
       @[dance].places[place].push couple
       @[dance].couples[couple] = place
       delete @[dance].unplaced[couple]
 
     loadTournamentData: ->
-      @majority = Math.ceil @tournament.count.judges / 2
-      @maxPlace = @tournament.count.couples - 1
+      @majority = Math.ceil @tournament.judges.length / 2
+      @maxPlace = @tournament.couples.length - 1
+      @dances = @tournament.dances
       @tournament.couples.forEach (couple, index) =>
         @dances.forEach (dance, i) =>
           # if one couple is missing the data for a danc, remove it from the dances-list
@@ -73,12 +76,13 @@ angular.module('taf.services.calculation', [])
       # run the init callback to find our target
       target = init.call obj
       if target is false
-        console.log '(%s:%d) Stepping through %s, no target found, increasing place', dance, 1+place, dance
+        log '(%s:%d) Stepping through %s, no target found, increasing place', dance, 1+place, dance
         if place < @maxPlace
           return @stepCouples dance, couples, place + 1, basePlace, init, filter, split
         return false
 
-      console.log '(%s:%d) Stepping through %s to find %d', dance, 1+place, dance, target
+
+      log '(%s:%d) Stepping through %s to find %d', dance, 1+place, dance, target
 
       splitCouples = []
       restCouples = []
@@ -87,15 +91,16 @@ angular.module('taf.services.calculation', [])
       obj.couples.forEach (couple, index) ->
         (if target is filter.call obj, couple, index then splitCouples else restCouples).push couple
 
+      log place, target, obj
+
       # if only one couple is found, place it
       if splitCouples.length is 1
-        console.log '(%s:%d) Found only couple %d with %d', dance, 1+place, splitCouples[0], target
+        log '(%s:%d) Found only couple %d with %d', dance, 1+place, splitCouples[0], target
         @placeCouple dance, splitCouples[0], basePlace++
-        place = Math.max place, basePlace
         # re-run with the rest couples
         return 1 + @stepCouples dance, restCouples, place, basePlace, init, filter, split
 
-      console.log "(%s:%d) Found %d couples, trying next rule", dance, 1+place, splitCouples.length, splitCouples
+      log "(%s:%d) Found %d couples, trying next rule", dance, 1+place, splitCouples.length, splitCouples
 
       # if we have more
       split.call @, splitCouples, place, basePlace, obj
@@ -114,9 +119,9 @@ angular.module('taf.services.calculation', [])
       , ((couple, index) -> @sums[index])
       , ((couples, place, basePlace, obj) ->
           if place < @maxPlace
-            console.log "(%s:%d) Resuming with rule findMinSum [findMinSum]", dance, 1+place
+            log "(%s:%d) Resuming with rule findMinSum [findMinSum]", dance, 1+place
             return @findMinSum dance, couples, place + 1, basePlace
-          console.log "(%s:%d) Stopping to place %d couples", dance, 1+place, couples.length
+          log "(%s:%d) Stopping to place %d couples", dance, 1+place, couples.length
           couples.forEach (couple) =>
             @placeCouple dance, couple, basePlace
         )
@@ -127,12 +132,16 @@ angular.module('taf.services.calculation', [])
       # initialize with max value
       , (->
           max = Math.max.apply null, @counts
-          if max >= majority then max else false
+          if max >= majority
+            log @counts, max, majority
+            max
+          else
+            false
         )
       # check max against the counts
       , ((couple, index) -> @counts[index])
       , ((couples, place, basePlace) ->
-          console.log "(%s:%d) Resuming with rule findMinSum [findMaxCount]", dance, 1+place
+          log "(%s:%d) Resuming with rule findMinSum [findMaxCount]", dance, 1+place
           @findMinSum dance, couples, place, basePlace
         )
 
@@ -151,7 +160,7 @@ angular.module('taf.services.calculation', [])
       sums    : sums
 
     findPlacements: (dance) ->
-      console.log "finding placements for %s", dance
+      log "finding placements for %s", dance
       places = @[dance].data.length
       place = 0
       while places > place
@@ -161,7 +170,7 @@ angular.module('taf.services.calculation', [])
         found = false
         while found is false and innerPlace < places
           found = @findPlacement dance, couples, innerPlace, place
-          console.log 'found?', found
+          log 'found?', found
           innerPlace++
 
         place += found
@@ -171,7 +180,7 @@ angular.module('taf.services.calculation', [])
           place = Infinity
 
     constructor: (@tournament) ->
-      console.log '===> Tournament: %s', @tournament.information?.title or @tournament.title or 'unknown Tournament'
+      log '===> Tournament: %s', @tournament.information?.title or @tournament.title or 'unknown Tournament'
 
       @reset()
       @loadTournamentData()
