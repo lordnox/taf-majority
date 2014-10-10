@@ -85,21 +85,21 @@ findCouples = (test) ->
       names:
         leader: nameL
         follower: nameF
-      unknown: match.unknown
+      number: match.number
       club:
         name: match.club
         location: match.clublocation
       PZ: match.pz
     if dances.SD
-      couple.SD =
+      couple['SLOW-DF'] =
         values: match.sdValues.split ''
         pz: match.sdPZ
     if dances.DF
-      couple.DF =
+      couple['DISCOFOX'] =
         values: match.dfValues.split ''
         pz: match.dfPZ
     if dances.KR
-      couple.KR =
+      couple['KUER'] =
         values: match.krValues.split ''
         pz: match.krPZ
 
@@ -111,10 +111,9 @@ test2data = (test) ->
   couples: findCouples test
   judges: findJudges test
 
-
 angular.module('taf.controller.import', ['ngStorage'])
 
-.controller 'tafImportCtrl', ($scope, $sessionStorage, $localStorage, tafCalculation) ->
+.controller 'tafImportCtrl', ($scope, $sessionStorage, $localStorage, tafTournament) ->
   $scope.lStore = $localStorage
   $scope.sStore = $sessionStorage
 
@@ -123,48 +122,60 @@ angular.module('taf.controller.import', ['ngStorage'])
       tournaments: []
     $sessionStorage.$default
       tournament: {}
-    $scope.text = 'TAF Süddeutsche Discofox-Meisterschaft 2014
+    $scope.text = 'TAF German Masters Discofox 2014
 
-Am 13.09.2014 in Friedrichshafen.
-Hgr. B Discofox          markierte Paare erhalten eine Platzierung         markierte Paare Süd-Institution erhalten die DM Qualifikation
+Am 20.09.2014 in Mülheim.
+Hgr. B Discofox          markierte Paare erhalten eine Platzierung         markierte Paare erhalten die DM Qualifikation          markierte Paare haben bereits die DM Qualifikation
 
 Endergebnis
 Platz Starter / Institution
 Endrunde  SD  Df  PZ
-1.  20  Tobias Wegner / Leonie Hackenberg (24)
-Turnverein Cannstatt 1846 e.V., Stuttgart 11611
-1.0 31322
-3.0 4.0
-2.  18  Tobias Kopelke / Annika Westedt (60)
-Discofox Club Hamburg, Hamburg  33522
-3.0 22151
+1.  26  Annika Westedt / Tobias Kopelke (43)
+Discofox Club Hamburg, Hamburg  63712
+3.0 25712
 1.0 4.0
-3.  OW  Urs Quaiser / Jacqueline Quaiser (3)
-International Schweiz 24233
-2.0 14213
+2.  24  Benjamin Zentz / Anastasia Zentz (47)
+Tanzschule hp-dancecompany, Bad Kreuznach 56231
+2.0 33131
 2.0 4.0
-4.  16  Monika Siemer / Axel Siemer (22)
-ADTV Tanzschule Harry Hagen, Bietigheim-Bissingen 45464
-4.0 63445
-4.5 8.5
-5.  14  Diemo Rohde / Jasmin Wegner (21)
-Tanz- und Sportclub Fellbach e.V., Fellbach 66345
-6.0 45634
-4.5 10.5
-6.  12  Ralf Niedner / Rosalba Musso (20)
-Tanzzentrum Allgäu, Kempten 52156
-5.0 56566
-6.0 11.0
-Vorrunde
-  Alle Paare weiter genommen.   ( )
+3.  22  Erika Keller / Christian Keller (12)
+ADTV Tanzschule Harry Hagen, Bietigheim-Bissingen 12627
+1.0 61547
+6.0 7.0
+4.  20  Marie-Luise Planert / Christopher Mettken (44)
+TSC Imperial Mülheim an der Ruhr e.V., Mülheim an der Ruhr  35346
+6.0 16323
+3.0 9.0
+5.  18  Steffi Beier / Tim La Civita (48)
+Tanzschule HAPPY HOURS, Hannover  41453
+4.0 72455
+5.0 9.0
+6.  16  Tobias Wegner / Leonie Hackenberg (15)
+Turnverein Cannstatt 1846 e.V., Stuttgart 27164
+5.0 47274
+4.0 9.0
+7.  14  Giulio Arancio / Gina Johannsen (51)
+ADTV Tanzschule van Hasselt GmbH, Köln  74575
+7.0 54666
+7.0 14.0
+1. Zwischenrunde
+8.  12  Marcel Mock / Jessica Lynen (40)  TanzTreff Jülich, Jülich
+9.  10  Nick Winkelmann / Katharina Nack (41) Tanzschule HAPPY HOURS, Hannover
+10.-11. 6 Henning Schall / Lena Thometzek (42)  TanzTreff Jülich, Jülich
+10.-11. 6 Mirko Kobrig / Ewelina Wolniak (49) Tafa Solingen GmbH, Solingen
+Hoffnungsrunde
+12.-13. 2 Monika Siemer / Axel Siemer (45)  ADTV Tanzschule Harry Hagen, Bietigheim-Bissingen
+12.-13. 2 Mike Emmel / Carmen Wolf (46) TanzCentrO, Oberhausen
+14. 0 Michael Becker / Melissa Becker (50)  Tanz-Turnier-Club Oberhausen e. V., Oberhausen
 
 Wertungsrichter
-Melanie Grund (Tanzen wo`s Spaß macht - Koblenz), Eren Dogan (DanceFever Neu-Isenburg), Petra Esquinas-Gomez (ADTV Tanzschule Vö, Heilbronn), Martina Mroczek (RSV Seeheim 1971 e.V. Abt. DiscoFox, Seeheim-Jugenheim), Dirk Szimon (ADTV Tanzschule Harry Hagen, Bietigheim-Bissingen)
+Gabi Kerner (ADTV Tanzschule Mettler, Oberhausen), Jose-Francisco Esquinas-Gomez (Tanzschule Vö, Heilbronn), Michael Panhey (TSC Imperial Mülheim), Geza Lang (ADTV Club-Tanzschule Geza Lang), Rouven Grassel (TTC Oberhausen)
 Turnierleitung
-TL: Thomas Schütze (Tanzschule No. 10, Friedrichshafen), SV: Harry Hagen (ADTV Tanzschule Harry Hagen, Bietigheim-Bissingen)
+TL: Franz Jansen (ADTV Altstadt Tanzschule Jansen), SV: Frank Becker (Tanzen Neu Erleben Neuss)
 Diese Liste wurde mit TopTurnier für Windows V7.5b erstellt.'
     $scope.data = {}
     $scope.updateData $scope.text
+
 
   $scope.open = 0
 
@@ -175,7 +186,7 @@ Diese Liste wurde mit TopTurnier für Windows V7.5b erstellt.'
     $scope.data = test2data text
 
   $scope.import = (data) ->
-    $localStorage.tournaments.unshift data
+#    $localStorage.tournaments.unshift data
     init()
 
   $scope.load = (tournament) ->
@@ -190,3 +201,5 @@ Diese Liste wurde mit TopTurnier für Windows V7.5b erstellt.'
     $localStorage.tournaments.splice index, 1
 
   init()
+  tournament = tafTournament.import $scope.data
+  console.log tournament

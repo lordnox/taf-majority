@@ -3,18 +3,13 @@
   <a class="nav-trigger" ng-click="navigation.open=!navigation.open"><span>Menu</span></a>
   <ul class="nav-list" highlight-active>
     <li>
-      <a ng-click="open=false" class="ti-pencil" href="#/taf/home">
-        <span data-i18n="Eingabe"></span>
+      <a ng-click="open=false" class="ti-list" ui-sref="taf.list">
+        <span data-i18n="Turnierliste"></span>
       </a>
     </li>
     <li>
       <a ng-click="open=false" class="ti-import" href="#/taf/import">
         <span data-i18n="Importieren"></span>
-      </a>
-    </li>
-    <li>
-      <a ng-click="open=false" class="glyphicon glyphicon-retweet" href="#/taf/calculate">
-        <span data-i18n="Berechnen"></span>
       </a>
     </li>
   </ul>

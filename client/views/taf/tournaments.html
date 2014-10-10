@@ -1,0 +1,33 @@
+<div class="page taf-body taf-tournaments">
+  <div class="row">
+    <div class="col-xs-12">
+      <form role="form" ng-submit="save()">
+        <div class="form-group">
+          <label for="tournamentName">Turnier:</label>
+          <input type="text" class="form-control" id="tournamentName" placeholder="Turniername" ng-model="tournament.name">
+        </div>
+      </form>
+    </div>
+    <div class="col-xs-12">
+      <a class="btn btn-block" ng-click="reset()">Session Reset</a>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <th>Turnier</th>
+      <th>Anzahl Paare</th>
+      <th>Anzahl Wertungsrichter</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="tournament in tournaments" ng-click="activate(tournament)" ui-sref="taf.tournament.view({id:tournament.id})">
+        <td ng-bind="tournament.name"></td>
+        <td>{{tournament.couples.length}}</td>
+        <td>{{tournament.judges.length}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pre>{{tournaments | json}}
+  </pre>
+</div>

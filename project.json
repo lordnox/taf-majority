@@ -21,7 +21,8 @@
       "client/bower_components/ngmap/build/scripts/ng-map.js",
       "client/bower_components/ng-tags-input/ng-tags-input.js",
       "client/bower_components/ngstorage/ngStorage.js",
-      "client/bower_components/xregexp/xregexp-all.js"
+      "client/bower_components/xregexp/xregexp-all.js",
+      "client/bower_components/angular-ui-router/release/angular-ui-router.js"
     ],
     "app.js:.tmp/": [
       ".tmp/scripts/app.js",
@@ -30,11 +31,11 @@
       ".tmp/scripts/Components/radialSelect.js",
       ".tmp/scripts/Components/tafRatings.js",
       ".tmp/scripts/TAF/taf.js",
-      ".tmp/scripts/TAF/applicationController.js",
+      ".tmp/scripts/TAF/tournamentService.js",
+      ".tmp/scripts/TAF/tournamentsController.js",
+      ".tmp/scripts/TAF/tournamentController.js",
       ".tmp/scripts/TAF/importController.js",
-      ".tmp/scripts/TAF/calculationController.js",
-      ".tmp/scripts/TAF/calculationService.js",
-      ".tmp/scripts/TAF/tournamentService.js"
+      ".tmp/scripts/TAF/calculationService.js"
     ],
     "vendor.css:client/": [
       "client/fonts/themify-icons/themify-icons.css",

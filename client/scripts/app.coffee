@@ -2,11 +2,11 @@
 
 angular.module('app', [
   # Angular modules
-  'ngRoute'
   'ngAnimate'
 
   # 3rd Party Modules
   'ui.bootstrap'
+  'ui.router'
 
   # Custom modules
   'app.controllers'
@@ -15,30 +15,17 @@ angular.module('app', [
   'taf'
 ])
 
-.config [
-  '$routeProvider'
-  ($routeProvider) ->
+.run ($rootScope, $state, $stateParams) ->
+  $rootScope.$state = $state;
+  $rootScope.$stateParams = $stateParams;
 
-    routes = [
-      'taf/home'
-      'taf/save'
-      'taf/import'
-      'taf/calculate'
-    ]
 
-    setRoutes = (route) ->
-      url = '/' + route
-      config =
-        templateUrl: 'views/' + route + '.html'
+  $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
+    console.log '$stateChangeError', toState
+    console.error error
 
-      $routeProvider.when url, config
-      return $routeProvider
+  $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+    console.log '$stateChangeSuccess', toState
 
-    routes.forEach (route) ->
-      setRoutes(route)
-
-    $routeProvider
-      .when('/', { redirectTo: '/taf/home'} )
-      .when('/404', { templateUrl: 'views/pages/404.html'} )
-      .otherwise( redirectTo: '/404' )
-]
+  $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
+    console.log '$stateChangeStart', toState

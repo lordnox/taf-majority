@@ -323,6 +323,9 @@ module.exports = (grunt) ->
           ]
 
   grunt.registerTask "process", ->
+    try
+      project = require './project'
+
     if not (project and project.files)
       grunt.log.error "no project data found to process"
       return

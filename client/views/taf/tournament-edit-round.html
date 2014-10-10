@@ -1,0 +1,16 @@
+<h2>Endrunde!</h2>
+
+<table class="table table-striped">
+  <thead>
+    <th>#</th>
+    <th ng-attr-colspan="{{tournament.judges.length}}">Wertungen</th>
+  </thead>
+  <tbody ng-repeat="dance in tournament.dances" ng-if="isDanceActive(dance)">
+    <tr ng-repeat="couple in tournament.couples">
+      <td ng-bind="couple.number"></td>
+      <td ng-repeat="judge in tournament.judges" ng-class="{'taf-dublicate': hasIndexError($index, dance)}">
+        <input class="taf-value-entry" type="text" ng-model="couple[dance].values[$index]">
+      </td>
+    </tr>
+  </tbody>
+</table>

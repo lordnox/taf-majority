@@ -1,26 +1,84 @@
 <div class="page body-taf" ng-controller="tafApplicationCtrl">
   <div class="row">
-    <h2>{{tournament.information.title || 'Finaleingabe'}}</h2>
-    <div><pre>{{tournament | json}}</pre></div>
-    <div class="group">
+    <h2 ng-if="!mode.edit.title" ng-click="mode.edit.title = true">{{tournament.title || 'Turniereingabe'}}</h2>
+    <div ng-if="mode.edit.title">
+      <form ng-submit="mode.edit.title = false"><input type="text" ng-model="tournament.title"></form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <span>Slow: </span><label class="ui-switch"><input ng-model="tournament.hasSlow" type="checkbox"><i></i></label>
+    </div>
+    <div class="col-xs-4">
+      <span>Quick: </span><label class="ui-switch"><input ng-model="tournament.hasQuick" type="checkbox"><i></i></label>
+    </div>
+    <div class="col-xs-4">
+      <span>Kür: </span><label class="ui-switch"><input ng-model="tournament.hasKuer" type="checkbox"><i></i></label>
+    </div>
+    <div class="col-xs-3">
       <div>
-        <span>Slow Discofox: </span><label class="ui-switch"><input ng-model="settings.slow" type="checkbox"><i></i></label>
-      </div>
-      <div>
-        <span>Quick Discofox: </span><label class="ui-switch"><input ng-model="settings.quick" type="checkbox"><i></i></label>
-      </div>
-      <div>
-        <span>Kür Discofox: </span><label class="ui-switch"><input ng-model="settings.kuer" type="checkbox"><i></i></label>
-      </div>
-      <div>
-        <input type="text" ng-model="input.judgeCount">
-      </div>
-      <div>
-        <input type="text" ng-model="input.couplesCount">
+        <label>Anzahl der Wertungsrichter</label>
+        <input type="text" ng-model="tournament.count.judges">
       </div>
     </div>
+    <div class="col-xs-3">
+      <div>
+        <label>Anzahl der Paare</label>
+        <input type="text" ng-model="tournament.count.couples">
+      </div>
+    </div>
+  </div>
+
+  <div class="row collapsed collapse-trigger">
+    <div class="col-xs-12" collapse-trigger>
+      <h3>Wertungsrichter</h3>
+    </div>
+    <div class="col-xs-12 collabsable">
+    </div>
+  </div>
+
+  <div class="row collapse-trigger">
+    <div class="col-xs-12" collapse-trigger>
+      <h3>Paare</h3>
+    </div>
+    <div class="col-xs-12 collabsable">
+      <table class="table table-striped">
+        <thead>
+          <th>Dame</th>
+          <th>Herr</th>
+          <th>Wertungen</th>
+          <th>Platz</th>
+        </thead>
+        <tbody ng-repeat="couple in tournament.couples track by couple.number">
+          <tr>
+            <td ng-bind="couple.names.follower"></td>
+            <td ng-bind="couple.names.leader"></td>
+            <td class="row">
+              <div class="col-xs-12" ng-if="tournament.hasSlow" ng-bind="couple.slow.values"></div>
+              <div class="col-xs-12" ng-if="tournament.hasQuick" ng-bind="couple.quick.values"></div>
+              <div class="col-xs-12" ng-if="tournament.hasKuer" ng-bind="couple.kuer.values"></div>
+            </td>
+            <td class="row">
+              <div class="col-xs-6">
+                <div class="col-xs-12" ng-if="tournament.hasSlow" ng-bind="couple.slow.place"></div>
+                <div class="col-xs-12" ng-if="tournament.hasQuick" ng-bind="couple.quick.place"></div>
+                <div class="col-xs-12" ng-if="tournament.hasKuer" ng-bind="couple.kuer.place"></div>
+              </div>
+              <div class="col-xs-6" ng-bind="couple.place"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row"><pre class="col-xs-12">{{tournament | json}}</pre></div>
+</div>
 
 
+
+<!--
+  <div class="row">
     <table class="table table-striped">
       <thead>
         <th colspan="2">Paar</th>
@@ -101,5 +159,4 @@
     </table>
 
     <div type="text" radial-select="numbers" ng-model="value" />
-  </div>
-</div>
+-->

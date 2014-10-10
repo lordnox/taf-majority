@@ -1,0 +1,28 @@
+<h2>Übersicht</h2>
+
+<div class="row">
+  <div class="col-xs-6">
+    <a class="btn btn-block btn-primary" ui-sref="^.editJudges">Wertungsrichter</a>
+  </div>
+  <div class="col-xs-6">
+    <a class="btn btn-block btn-primary" ui-sref="^.editCouples">Endrundenpaare</a>
+  </div>
+  <div class="col-xs-12">
+    <a class="btn btn-block btn-primary" ui-sref="^.enterRound">Endrunde</a>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <th>Startnummer</th>
+    <th>Herr</th>
+    <th>Dame</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="couple in tournament.couples">
+      <td ng-bind="couple.number"></td>
+      <td ng-bind="couple.leader"></td>
+      <td ng-bind="couple.follower"></td>
+    </tr>
+  </tbody>
+</table>

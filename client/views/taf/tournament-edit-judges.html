@@ -1,0 +1,29 @@
+<h2>Wertungsrichter Eingabe</h2>
+
+<div class="row">
+  <form role="form" ng-submit="addJudge(judge)">
+    <div class="form-group">
+      <label for="judgeName">Buchstabe:</label>
+      <input type="text" class="form-control" id="judgeName" placeholder="Name" ng-model="judge.letter">
+    </div>
+    <div class="form-group">
+      <label for="judgeName">Name:</label>
+      <input type="text" class="form-control" id="judgeName" placeholder="Name" ng-model="judge.name">
+    </div>
+
+    <input type="submit" class="btn-block btn btn-primary" value="Hinzufügen">
+  </form>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <th>#</th>
+    <th>Name</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="judge in tournament.judges">
+      <td ng-bind="judge.letter"></td>
+      <td ng-bind="judge.name"></td>
+    </tr>
+  </tbody>
+</table>

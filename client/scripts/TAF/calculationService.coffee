@@ -42,8 +42,8 @@ angular.module('taf.services.calculation', [])
       delete @[dance].unplaced[couple]
 
     loadTournamentData: ->
-      @majority = Math.ceil @tournament.judges.length / 2
-      @maxPlace = @tournament.couples.length - 1
+      @majority = Math.ceil @tournament.count.judges / 2
+      @maxPlace = @tournament.count.couples - 1
       @tournament.couples.forEach (couple, index) =>
         @dances.forEach (dance, i) =>
           # if one couple is missing the data for a danc, remove it from the dances-list
@@ -171,7 +171,7 @@ angular.module('taf.services.calculation', [])
           place = Infinity
 
     constructor: (@tournament) ->
-      console.log '===> Tournament: %s', @tournament.information.title
+      console.log '===> Tournament: %s', @tournament.information?.title or @tournament.title or 'unknown Tournament'
 
       @reset()
       @loadTournamentData()

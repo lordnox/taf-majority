@@ -1,0 +1,35 @@
+<h2>Endrunden Eingabe</h2>
+
+<div class="row">
+  <form role="form" ng-submit="addCouple(couple)">
+    <div class="form-group">
+      <label for="coupleNumber">Startnummer:</label>
+      <input type="text" class="form-control" id="coupleNumber" placeholder="Startnummer" ng-model="couple.number">
+    </div>
+    <div class="form-group">
+      <label for="coupleLeader">Herr:</label>
+      <input type="text" class="form-control" id="coupleLeader" placeholder="Herr" ng-model="couple.leader">
+    </div>
+    <div class="form-group">
+      <label for="coupleFollower">Dame:</label>
+      <input type="text" class="form-control" id="coupleFollower" placeholder="Dame" ng-model="couple.follower">
+    </div>
+
+    <input type="submit" class="btn-block btn btn-primary" value="Hinzufügen">
+  </form>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <th>Startnummer</th>
+    <th>Herr</th>
+    <th>Dame</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="couple in tournament.couples">
+      <td ng-bind="couple.number"></td>
+      <td ng-bind="couple.leader"></td>
+      <td ng-bind="couple.follower"></td>
+    </tr>
+  </tbody>
+</table>

@@ -30,7 +30,7 @@
     <aside data-ng-include=" 'views/nav.html' " class="nav-container"></aside>
 
     <div class="content-container" data-ng-class="{small: navigation.open}">
-      <section data-ng-view class="view-container {{admin.pageTransition.class}}"></section>
+      <section data-ui-view class="view-container {{admin.pageTransition.class}}"></section>
     </div>
 
     <!-- build:js scripts/vendor.js -->
@@ -47,6 +47,7 @@
     <script src='bower_components/ng-tags-input/ng-tags-input.js'></script>
     <script src='bower_components/ngstorage/ngStorage.js'></script>
     <script src='bower_components/xregexp/xregexp-all.js'></script>
+    <script src='bower_components/angular-ui-router/release/angular-ui-router.js'></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,client}) scripts/app.js -->
@@ -56,11 +57,11 @@
     <script src='scripts/Components/radialSelect.js'></script>
     <script src='scripts/Components/tafRatings.js'></script>
     <script src='scripts/TAF/taf.js'></script>
-    <script src='scripts/TAF/applicationController.js'></script>
-    <script src='scripts/TAF/importController.js'></script>
-    <script src='scripts/TAF/calculationController.js'></script>
-    <script src='scripts/TAF/calculationService.js'></script>
     <script src='scripts/TAF/tournamentService.js'></script>
+    <script src='scripts/TAF/tournamentsController.js'></script>
+    <script src='scripts/TAF/tournamentController.js'></script>
+    <script src='scripts/TAF/importController.js'></script>
+    <script src='scripts/TAF/calculationService.js'></script>
     <!-- endbuild -->
 
   </body>

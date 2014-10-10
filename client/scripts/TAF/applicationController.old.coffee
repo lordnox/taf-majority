@@ -8,7 +8,15 @@ createArray = (n, fn = (i) -> i) ->
   array
 
 angular.module('taf.controller.application', ['ngStorage'])
+.controller 'tafApplicationCtrl', ($scope, $sessionStorage, tafTournament) ->
+  $scope.mode = {
+    edit: {
+      title: false
+    }
+  };
+  $scope.tournament = tafTournament.active()
 
+###
 .controller 'tafApplicationCtrl', ($scope, $sessionStorage, tafTournament) ->
   $scope.input =
     couple:                             # Eingabe für das aktuelle Paar
@@ -55,3 +63,4 @@ angular.module('taf.controller.application', ['ngStorage'])
     rows++ if $scope.settings.quick
     rows++ if $scope.settings.kuer
     rows
+### # ###
