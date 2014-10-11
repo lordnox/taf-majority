@@ -1,0 +1,9 @@
+<div class="radial-select-component" ng-class="{ opened: open, closed: !open }">
+  <div class="wrapper">
+    <ul>
+      <li ng-repeat="(index, number) in select" ng-class="{active: number==model}" ng-style="css_li(index)">
+        <a ng-click="set(number, $event)" ng-style="css_anchor(index)"><span class="icon-picture"></span>{{number}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

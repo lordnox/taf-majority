@@ -1,0 +1,43 @@
+<h2>Endrunden Eingabe</h2>
+
+<div class="row">
+  <form role="form" ng-submit="addCouple(couple)">
+    <div class="col-xs-12 form-group">
+      <label for="coupleNumber">Startnummer:</label>
+      <input type="number" class="form-control" id="coupleNumber" placeholder="Startnummer" ng-model="couple.number">
+    </div>
+    <div class="col-xs-12 form-group">
+      <label for="coupleLeader">Herr:</label>
+      <input type="text" class="form-control" id="coupleLeader" placeholder="Herr" ng-model="couple.leader">
+    </div>
+    <div class="col-xs-12 form-group">
+      <label for="coupleFollower">Dame:</label>
+      <input type="text" class="form-control" id="coupleFollower" placeholder="Dame" ng-model="couple.follower">
+    </div>
+
+    <div class="col-xs-12">
+      <input type="submit" class="btn-block btn btn-success" value="Hinzufügen">
+    </div>
+  </form>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <th>#</th>
+    <th>Herr</th>
+    <th>Dame</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="couple in tournament.couples">
+      <td>
+        <input class="taf-value-entry" type="text" ng-model="couple.number">
+      </td>
+      <td>
+        <input type="text" class="col-xs-12" ng-model="couple.leader">
+      </td>
+      <td>
+        <input type="text" class="col-xs-12" ng-model="couple.follower">
+      </td>
+    </tr>
+  </tbody>
+</table>

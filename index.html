@@ -1,0 +1,34 @@
+<!doctype html>
+<!--[if lt IE 8]><html class="no-js lt-ie8"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Web Application</title>
+    <meta name="description" content="Responsive Admin Web App">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+    <link rel="stylesheet" href="fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="fonts/weather-icons/css/weather-icons.css">
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+  <body data-ng-app="app" id="app" class="app" data-ng-controller="AppCtrl">
+    <!--[if lt IE 9]>
+      <div class="lt-ie9-bg">
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser.</p>
+        <p>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      </div>
+    <![endif]-->
+
+    <aside data-ng-include=" 'views/nav.html' " class="nav-container"></aside>
+
+    <div class="content-container" data-ng-class="{small: navigation.open}">
+      <section data-ui-view class="view-container {{admin.pageTransition.class}}"></section>
+    </div>
+
+    <script src="scripts/vendor.js"></script>
+
+    <script src="scripts/app.js"></script>
+
+  </body>
+</html>
